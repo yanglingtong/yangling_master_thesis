@@ -1,0 +1,748 @@
+2023-03-07 12:25:54.115697: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 AVX512F AVX512_VNNI FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2023-03-07 12:25:59.540528: I tensorflow/core/util/port.cc:104] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2023-03-07 12:26:00.455582: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2023-03-07 12:26:00.455629: I tensorflow/compiler/xla/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2023-03-07 12:26:18.060439: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer.so.7'; dlerror: libnvinfer.so.7: cannot open shared object file: No such file or directory
+2023-03-07 12:26:18.073704: W tensorflow/compiler/xla/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libnvinfer_plugin.so.7'; dlerror: libnvinfer_plugin.so.7: cannot open shared object file: No such file or directory
+2023-03-07 12:26:18.073731: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
+Using custom data configuration default-6a4048e0959d3390
+Found cached dataset csv (/home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317)
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00,  2.18it/s]100%|██████████| 1/1 [00:00<00:00,  2.17it/s]
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-625c8a49e46d5dd8.arrow
+***** Running Prediction *****
+  Num examples = 594
+  Batch size = 32
+/pfs/data5/home/ma/ma_ma/ma_ytong/someNewEnvName/lib64/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 14.03it/s] 21%|██        | 4/19 [00:00<00:01,  9.30it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.44it/s] 37%|███▋      | 7/19 [00:00<00:01,  8.08it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.96it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.85it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.79it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.74it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.73it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.51it/s] 74%|███████▎  | 14/19 [00:01<00:00,  6.13it/s] 79%|███████▉  | 15/19 [00:01<00:00,  6.37it/s] 84%|████████▍ | 16/19 [00:02<00:00,  6.57it/s] 89%|████████▉ | 17/19 [00:02<00:00,  6.71it/s] 95%|█████████▍| 18/19 [00:02<00:00,  6.80it/s]100%|██████████| 19/19 [00:02<00:00,  7.32it/s]100%|██████████| 19/19 [00:02<00:00,  7.21it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_2/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_2/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_2.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-16f1a20df289d911.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 594
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 13.95it/s] 21%|██        | 4/19 [00:00<00:01,  8.81it/s] 26%|██▋       | 5/19 [00:00<00:01,  8.33it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.08it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.61it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.58it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.03it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.07it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.22it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.35it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.29it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.38it/s] 79%|███████▉  | 15/19 [00:01<00:00,  7.44it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.48it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.51it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.36it/s]100%|██████████| 19/19 [00:02<00:00,  7.73it/s]100%|██████████| 19/19 [00:02<00:00,  7.69it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_3/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_3/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_3.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-c96175d13133a58e.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 594
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 14.14it/s] 21%|██        | 4/19 [00:00<00:01,  9.15it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.09it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.81it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.61it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.34it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.26it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.20it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.33it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.40it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.46it/s] 79%|███████▉  | 15/19 [00:01<00:00,  7.50it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.53it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.55it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.57it/s]100%|██████████| 19/19 [00:02<00:00,  7.93it/s]100%|██████████| 19/19 [00:02<00:00,  7.78it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_4/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_4/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_4.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-3734f8b77241d8b7.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 13.62it/s] 21%|██        | 4/19 [00:00<00:01,  9.01it/s] 26%|██▋       | 5/19 [00:00<00:01,  8.34it/s] 32%|███▏      | 6/19 [00:00<00:01,  7.91it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.51it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.37it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.28it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.23it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.33it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.44it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.48it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.51it/s] 79%|███████▉  | 15/19 [00:01<00:00,  7.54it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.56it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.57it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.63it/s]100%|██████████| 19/19 [00:02<00:00,  7.98it/s]100%|██████████| 19/19 [00:02<00:00,  7.79it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_5/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_5/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_5.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-18ad1da83475ff3d.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 15.24it/s] 21%|██        | 4/19 [00:00<00:01,  9.30it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.20it/s] 37%|███▋      | 7/19 [00:00<00:01,  8.05it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.94it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.60it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.60it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.61it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.63it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.45it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.20it/s] 79%|███████▉  | 15/19 [00:01<00:00,  7.18it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.15it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.12it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.12it/s]100%|██████████| 19/19 [00:02<00:00,  7.58it/s]100%|██████████| 19/19 [00:02<00:00,  7.75it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_6/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_6/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_6.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-ca57cd2c2f3e6dc7.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 13.82it/s] 21%|██        | 4/19 [00:00<00:01,  9.12it/s] 32%|███▏      | 6/19 [00:00<00:01,  6.94it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.09it/s] 42%|████▏     | 8/19 [00:01<00:01,  7.21it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.09it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.23it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.33it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.41it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.46it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.11it/s] 79%|███████▉  | 15/19 [00:02<00:00,  7.10it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.09it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.09it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.26it/s]100%|██████████| 19/19 [00:02<00:00,  7.69it/s]100%|██████████| 19/19 [00:02<00:00,  7.46it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_7/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_7/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_7.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-ca097e86947179db.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 14.21it/s] 21%|██        | 4/19 [00:00<00:01,  8.42it/s] 26%|██▋       | 5/19 [00:00<00:01,  7.68it/s] 32%|███▏      | 6/19 [00:00<00:01,  7.35it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.41it/s] 42%|████▏     | 8/19 [00:01<00:01,  7.30it/s] 47%|████▋     | 9/19 [00:01<00:01,  6.87it/s] 53%|█████▎    | 10/19 [00:01<00:01,  6.81it/s] 58%|█████▊    | 11/19 [00:01<00:01,  6.75it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.02it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.03it/s] 74%|███████▎  | 14/19 [00:01<00:00,  6.82it/s] 79%|███████▉  | 15/19 [00:02<00:00,  6.89it/s] 84%|████████▍ | 16/19 [00:02<00:00,  6.94it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.14it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.30it/s]100%|██████████| 19/19 [00:02<00:00,  7.72it/s]100%|██████████| 19/19 [00:02<00:00,  7.37it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_8/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_8/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_8.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-cddcfd580717fb2c.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 15.40it/s] 21%|██        | 4/19 [00:00<00:01,  9.57it/s] 32%|███▏      | 6/19 [00:00<00:01,  7.99it/s] 37%|███▋      | 7/19 [00:00<00:01,  7.75it/s] 42%|████▏     | 8/19 [00:00<00:01,  7.57it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.43it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.33it/s] 58%|█████▊    | 11/19 [00:01<00:01,  5.42it/s] 63%|██████▎   | 12/19 [00:01<00:01,  5.93it/s] 68%|██████▊   | 13/19 [00:01<00:00,  6.28it/s] 74%|███████▎  | 14/19 [00:01<00:00,  6.49it/s] 79%|███████▉  | 15/19 [00:02<00:00,  6.65it/s] 84%|████████▍ | 16/19 [00:02<00:00,  6.78it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.00it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.21it/s]100%|██████████| 19/19 [00:02<00:00,  7.65it/s]100%|██████████| 19/19 [00:02<00:00,  7.23it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_9/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_9/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_9.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-12d3d19e3b0e6278.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 14.66it/s] 21%|██        | 4/19 [00:00<00:01,  9.61it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.63it/s] 37%|███▋      | 7/19 [00:00<00:01,  8.38it/s] 42%|████▏     | 8/19 [00:00<00:01,  8.20it/s] 47%|████▋     | 9/19 [00:01<00:01,  8.06it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.74it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.55it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.62it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.64it/s] 74%|███████▎  | 14/19 [00:01<00:00,  7.66it/s] 79%|███████▉  | 15/19 [00:01<00:00,  7.67it/s] 84%|████████▍ | 16/19 [00:01<00:00,  7.69it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.71it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.72it/s]100%|██████████| 19/19 [00:02<00:00,  8.04it/s]100%|██████████| 19/19 [00:02<00:00,  8.10it/s]
+loading configuration file ../../../models/paper_rep/framing/best_model_redo/bm_10/config.json
+Model config RobertaConfig {
+  "_name_or_path": "roberta-base",
+  "architectures": [
+    "RobertaForSequenceClassification"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "id2label": {
+    "0": "LABEL_0",
+    "1": "LABEL_1",
+    "2": "LABEL_2",
+    "3": "LABEL_3",
+    "4": "LABEL_4",
+    "5": "LABEL_5",
+    "6": "LABEL_6",
+    "7": "LABEL_7",
+    "8": "LABEL_8",
+    "9": "LABEL_9",
+    "10": "LABEL_10",
+    "11": "LABEL_11",
+    "12": "LABEL_12",
+    "13": "LABEL_13",
+    "14": "LABEL_14"
+  },
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "label2id": {
+    "LABEL_0": 0,
+    "LABEL_1": 1,
+    "LABEL_10": 10,
+    "LABEL_11": 11,
+    "LABEL_12": 12,
+    "LABEL_13": 13,
+    "LABEL_14": 14,
+    "LABEL_2": 2,
+    "LABEL_3": 3,
+    "LABEL_4": 4,
+    "LABEL_5": 5,
+    "LABEL_6": 6,
+    "LABEL_7": 7,
+    "LABEL_8": 8,
+    "LABEL_9": 9
+  },
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "problem_type": "single_label_classification",
+  "torch_dtype": "float32",
+  "transformers_version": "4.25.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file ../../../models/paper_rep/framing/best_model_redo/bm_10/pytorch_model.bin
+All model checkpoint weights were used when initializing RobertaForSequenceClassification.
+
+All the weights of RobertaForSequenceClassification were initialized from the model checkpoint at ../../../models/paper_rep/framing/best_model_redo/bm_10.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use RobertaForSequenceClassification for predictions without further training.
+Loading cached processed dataset at /home/ma/ma_ma/ma_ytong/.cache/huggingface/datasets/csv/default-6a4048e0959d3390/0.0.0/6b34fb8fcf56f7c8ba51dc895bfa2bfbe43546f190a60fcf74bb5e8afdcc2317/cache-2ae2a0c047200cf0.arrow
+No `TrainingArguments` passed, using `output_dir=tmp_trainer`.
+PyTorch: setting up devices
+The default value for the training argument `--report_to` will change in v5 (from all installed integrations to none). In v5, you will need to use `--report_to all` to get the same behavior as now. You should start updating your code and make this info disappear :-).
+***** Running Prediction *****
+  Num examples = 593
+  Batch size = 32
+  0%|          | 0/19 [00:00<?, ?it/s] 11%|█         | 2/19 [00:00<00:01, 14.17it/s] 21%|██        | 4/19 [00:00<00:01,  9.58it/s] 32%|███▏      | 6/19 [00:00<00:01,  8.64it/s] 37%|███▋      | 7/19 [00:00<00:01,  8.42it/s] 42%|████▏     | 8/19 [00:00<00:01,  8.25it/s] 47%|████▋     | 9/19 [00:01<00:01,  7.93it/s] 53%|█████▎    | 10/19 [00:01<00:01,  7.78it/s] 58%|█████▊    | 11/19 [00:01<00:01,  7.79it/s] 63%|██████▎   | 12/19 [00:01<00:00,  7.81it/s] 68%|██████▊   | 13/19 [00:01<00:00,  7.81it/s] 74%|███████▎  | 14/19 [00:01<00:00,  6.64it/s] 79%|███████▉  | 15/19 [00:01<00:00,  6.94it/s] 84%|████████▍ | 16/19 [00:02<00:00,  7.18it/s] 89%|████████▉ | 17/19 [00:02<00:00,  7.34it/s] 95%|█████████▍| 18/19 [00:02<00:00,  7.47it/s]100%|██████████| 19/19 [00:02<00:00,  7.85it/s]100%|██████████| 19/19 [00:02<00:00,  7.92it/s]
+              precision    recall  f1-score   support
+
+           0      0.000     0.000     0.000        10
+           1      0.652     0.669     0.660       414
+           2      0.489     0.419     0.451       210
+           3      0.569     0.487     0.525        76
+           4      0.309     0.297     0.303       155
+           5      0.684     0.615     0.648       957
+           6      0.399     0.412     0.405       473
+           7      0.725     0.780     0.752       803
+           8      0.662     0.622     0.641       286
+           9      0.651     0.657     0.654       239
+          10      0.473     0.537     0.503       410
+          11      0.787     0.680     0.730       556
+          12      0.615     0.691     0.651       243
+          13      0.751     0.811     0.780       969
+          14      0.763     0.682     0.720       132
+
+    accuracy                          0.646      5933
+   macro avg      0.569     0.557     0.562      5933
+weighted avg      0.648     0.646     0.646      5933
+
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc2n520
+Job ID: 21886359
+Cluster: uc2
+User/Group: ma_ytong/ma_ma
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 64
+CPU Utilized: 00:01:03
+CPU Efficiency: 0.38% of 04:35:12 core-walltime
+Job Wall-clock time: 00:04:18
+Memory Utilized: 4.86 GB
+Memory Efficiency: 24.88% of 19.53 GB
