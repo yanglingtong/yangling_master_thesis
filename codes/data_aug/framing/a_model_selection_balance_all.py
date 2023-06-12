@@ -110,7 +110,7 @@ def my_objective(metrics):
 
 
 
-def model_selection_swap( output_dir,aug_label_ratio, aug_to):
+def model_selection( output_dir,aug_label_ratio, aug_to):
     kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
     kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
     nCross = 0
@@ -174,219 +174,16 @@ def model_selection_swap( output_dir,aug_label_ratio, aug_to):
             trainer.save_model(output_dir + 'bm_' + str(nCross))
             break
 
-def model_selection_syn( output_dir,aug_label_ratio, aug_to):
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds_1['train']):
-        nCross = nCross + 1
-        #if nCross >= 6:
-        train_set_1 = ds_1['train'].select(train_idx)
 
-        for train_idx, val_idx in kf_2.split(train_set_1):
-            val = train_set_1.select(val_idx)
-                 
-            train_1 = train_set_1.select(train_idx)
-            train_1 = pd.DataFrame(train_1)
-            train_2 = balance_syn_flexible(train_1,r = 0.1,aug_label_ratio=aug_label_ratio, aug_to = aug_to)    
-            train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-            #train = train.drop_duplicates()
-            train = Dataset.from_pandas(train)
-          
-            # tokenize and format input data
-            ds_train = train.map(tokenization, batched=True)
-            ds_val = val.map(tokenization, batched=True)
-            ds_train.set_format("torch")
-            ds_val.set_format("torch")
-
-            args = TrainingArguments(
-                    output_dir=output_dir,
-                    evaluation_strategy="steps",
-                    eval_steps=500,
-                    learning_rate = best_para['learning_rate'],
-                    per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                    warmup_steps = best_para['warmup_steps'],
-                    per_device_eval_batch_size=64,
-                    num_train_epochs=100,
-                    gradient_accumulation_steps=1,
-                    weight_decay = 5e-7,
-                    adam_epsilon= 1e-8,
-                    max_grad_norm=1.0,
-                    seed=42,
-                    #gradient_checkpointing=True,
-                    fp16=True,
-                    load_best_model_at_end=True,
-                    metric_for_best_model = 'eval_accuracy',
-                    )
-
-
-
-            trainer = Trainer(
-                    args=args,
-                    compute_metrics=compute_metrics,
-                    train_dataset=ds_train, 
-                    eval_dataset=ds_val,
-                    data_collator=data_collator,
-                    tokenizer=tokenizer,
-                    callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                    model_init=model_init
-                )
-    
-    
-            print(str(nCross) + ' Cross Validation')
-            trainer.train()
-            trainer.save_model(output_dir + 'bm_' + str(nCross))
-            break
-
-def model_selection_bt( output_dir,aug_label_ratio, aug_to):
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds_1['train']):
-        nCross = nCross + 1
-        #if nCross >= 6:
-        train_set_1 = ds_1['train'].select(train_idx)
-
-        for train_idx, val_idx in kf_2.split(train_set_1):
-            val = train_set_1.select(val_idx)
-                 
-            train_1 = train_set_1.select(train_idx)
-            train_1 = pd.DataFrame(train_1)
-            train_2 = balance_backT_flexible(train_1,nbest = 4, aug_label_ratio=aug_label_ratio, aug_to = aug_to)    
-            train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-            #train = train.drop_duplicates()
-            train = Dataset.from_pandas(train)
-          
-            # tokenize and format input data
-            ds_train = train.map(tokenization, batched=True)
-            ds_val = val.map(tokenization, batched=True)
-            ds_train.set_format("torch")
-            ds_val.set_format("torch")
-
-            args = TrainingArguments(
-                    output_dir=output_dir,
-                    evaluation_strategy="steps",
-                    eval_steps=500,
-                    learning_rate = best_para['learning_rate'],
-                    per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                    warmup_steps = best_para['warmup_steps'],
-                    per_device_eval_batch_size=64,
-                    num_train_epochs=100,
-                    gradient_accumulation_steps=1,
-                    weight_decay = 5e-7,
-                    adam_epsilon= 1e-8,
-                    max_grad_norm=1.0,
-                    seed=42,
-                    #gradient_checkpointing=True,
-                    fp16=True,
-                    load_best_model_at_end=True,
-                    metric_for_best_model = 'eval_accuracy',
-                    )
-
-
-
-            trainer = Trainer(
-                    args=args,
-                    compute_metrics=compute_metrics,
-                    train_dataset=ds_train, 
-                    eval_dataset=ds_val,
-                    data_collator=data_collator,
-                    tokenizer=tokenizer,
-                    callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                    model_init=model_init
-                )
-    
-    
-            print(str(nCross) + ' Cross Validation')
-            trainer.train()
-            trainer.save_model(output_dir + 'bm_' + str(nCross))
-            break
-
-def model_selection_all( output_dir,aug_label_ratio,aug_to):
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds_1['train']):
-        nCross = nCross + 1
-        #if nCross >= 6:
-        train_set_1 = ds_1['train'].select(train_idx)
-
-        for train_idx, val_idx in kf_2.split(train_set_1):
-            val = train_set_1.select(val_idx)
-                 
-            train_1 = train_set_1.select(train_idx)
-            train_1 = pd.DataFrame(train_1)
-            train_2 = balance_allMethods_flexible(train_1,r = 0.1,nbest = 2, aug_label_ratio=aug_label_ratio, aug_to = aug_to)  
-            train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-            #train = train.drop_duplicates()
-            train = Dataset.from_pandas(train)
-          
-            # tokenize and format input data
-            ds_train = train.map(tokenization, batched=True)
-            ds_val = val.map(tokenization, batched=True)
-            ds_train.set_format("torch")
-            ds_val.set_format("torch")
-
-            args = TrainingArguments(
-                    output_dir=output_dir,
-                    evaluation_strategy="steps",
-                    eval_steps=500,
-                    learning_rate = best_para['learning_rate'],
-                    per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                    warmup_steps = best_para['warmup_steps'],
-                    per_device_eval_batch_size=64,
-                    num_train_epochs=100,
-                    gradient_accumulation_steps=1,
-                    weight_decay = 5e-7,
-                    adam_epsilon= 1e-8,
-                    max_grad_norm=1.0,
-                    seed=42,
-                    #gradient_checkpointing=True,
-                    fp16=True,
-                    load_best_model_at_end=True,
-                    metric_for_best_model = 'eval_accuracy',
-                    )
-
-
-
-            trainer = Trainer(
-                    args=args,
-                    compute_metrics=compute_metrics,
-                    train_dataset=ds_train, 
-                    eval_dataset=ds_val,
-                    data_collator=data_collator,
-                    tokenizer=tokenizer,
-                    callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                    model_init=model_init
-                )
-    
-    
-            print(str(nCross) + ' Cross Validation')
-            trainer.train()
-            trainer.save_model(output_dir + 'bm_' + str(nCross))
-            break
 
 def main():
-    # aug_label_ratio = 0.5
-    # folder_path = 'swap_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    # output_dir='../../../models/data_aug/framing/' + folder_path
-    # model_selection_swap(output_dir,aug_label_ratio, aug_to= 1-aug_label_ratio)
-    
-    # aug_label_ratio = 0.7
-    # folder_path = 'syn_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    # output_dir='../../../models/data_aug/framing/' + folder_path
-    # model_selection_syn(output_dir,aug_label_ratio, aug_to= 1-aug_label_ratio)
-    
     aug_label_ratio_list = [0.1,0.3,0.5,0.7,0.9]
     for aug_label_ratio in aug_label_ratio_list:
-        folder_path = 'bt_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
+        folder_path = 'swap_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
         output_dir='../../../models/data_aug/framing/' + folder_path
-        model_selection_bt(output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
+        model_selection(output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
     
-    # aug_label_ratio = 0.5
-    # folder_path = 'all_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    # output_dir='../../../models/data_aug/framing/' + folder_path
-    # model_selection_all(output_dir,aug_label_ratio, aug_to= 1-aug_label_ratio)
+
 
 if __name__ == "__main__":
     main()

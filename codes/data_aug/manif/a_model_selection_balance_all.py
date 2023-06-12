@@ -116,7 +116,7 @@ def ray_hp_space(trial):
 def my_objective(metrics):
     return metrics["eval_accuracy"]
 
-def model_selection_swap(s, output_dir, aug_label_ratio, aug_to):
+def model_selection(s, output_dir, aug_label_ratio, aug_to):
     print(s)
     set_seed(s)
     
@@ -179,227 +179,16 @@ def model_selection_swap(s, output_dir, aug_label_ratio, aug_to):
             trainer.save_model(output_dir + str(s)+'/bm_' + str(nCross))
             break
     
-def model_selection_syn(s, output_dir, aug_label_ratio, aug_to):
-    print(s)
-    set_seed(s)
-    
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds['train']):
-        nCross = nCross + 1     
-        train_set_1 = ds['train'].select(train_idx)
 
-        for train_idx, val_idx in kf_2.split(train_set_1):
-            val = train_set_1.select(val_idx)
-                
-            train_1 = train_set_1.select(train_idx)
-            train_1 = pd.DataFrame(train_1)
-            train_2 = balance_syn_flexible(train_1,r = 0.05,aug_label_ratio=aug_label_ratio, aug_to = aug_to)           
-            train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-            #train = train.drop_duplicates()
-            train = Dataset.from_pandas(train)
-        
-            # tokenize and format input data
-            ds_train = train.map(tokenization, batched=True)
-            ds_val = val.map(tokenization, batched=True)
-            ds_train.set_format("torch")
-            ds_val.set_format("torch")
-            
-            model = RobertaForSequenceClassification.from_pretrained(checkpoint, problem_type= "single_label_classification",num_labels=8).to('cuda')
-            args = TrainingArguments(
-                #output_dir=output_dir,
-                output_dir=output_dir,
-                evaluation_strategy="steps",
-                eval_steps=500,
-                learning_rate = best_para['learning_rate'],
-                per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                warmup_steps = best_para['warmup_steps'],
-                per_device_eval_batch_size=64,
-                num_train_epochs=100,
-                seed=42,
-                #gradient_checkpointing=True,
-                fp16=True,
-                load_best_model_at_end=True,
-                metric_for_best_model = 'eval_accuracy',
-                )
-
-
-            trainer = Trainer(
-                    args=args,
-                    compute_metrics=compute_metrics,
-                    train_dataset=ds_train, 
-                    eval_dataset=ds_val,
-                    data_collator=data_collator,
-                    tokenizer=tokenizer,
-                    callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                    model=model
-                )
-
-
-            print(str(nCross) + ' Cross Validation')
-            trainer.train()
-            trainer.save_model(output_dir + str(s)+'/bm_' + str(nCross))
-            break
-        
-def model_selection_bt(s, output_dir, aug_label_ratio, aug_to):
-    print(s)
-    set_seed(s)
-    
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds['train']):
-        nCross = nCross + 1     
-        train_set_1 = ds['train'].select(train_idx)
-        if nCross >= 5:
-
-            for train_idx, val_idx in kf_2.split(train_set_1):
-                val = train_set_1.select(val_idx)
-                    
-                train_1 = train_set_1.select(train_idx)
-                train_1 = pd.DataFrame(train_1)
-                train_2 = balance_backT_flexible(train_1,nbest = 4, aug_label_ratio=aug_label_ratio, aug_to = aug_to)           
-                train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-                #train = train.drop_duplicates()
-                train = Dataset.from_pandas(train)
-            
-                # tokenize and format input data
-                ds_train = train.map(tokenization, batched=True)
-                ds_val = val.map(tokenization, batched=True)
-                ds_train.set_format("torch")
-                ds_val.set_format("torch")
-                
-                model = RobertaForSequenceClassification.from_pretrained(checkpoint, problem_type= "single_label_classification",num_labels=8).to('cuda')
-                args = TrainingArguments(
-                    #output_dir=output_dir,
-                    output_dir=output_dir,
-                    evaluation_strategy="steps",
-                    eval_steps=500,
-                    learning_rate = best_para['learning_rate'],
-                    per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                    warmup_steps = best_para['warmup_steps'],
-                    per_device_eval_batch_size=64,
-                    num_train_epochs=100,
-                    seed=42,
-                    #gradient_checkpointing=True,
-                    fp16=True,
-                    load_best_model_at_end=True,
-                    metric_for_best_model = 'eval_accuracy',
-                    )
-
-
-                trainer = Trainer(
-                        args=args,
-                        compute_metrics=compute_metrics,
-                        train_dataset=ds_train, 
-                        eval_dataset=ds_val,
-                        data_collator=data_collator,
-                        tokenizer=tokenizer,
-                        callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                        model=model
-                    )
-
-
-                print(str(nCross) + ' Cross Validation')
-                trainer.train()
-                trainer.save_model(output_dir + str(s)+'/bm_' + str(nCross))
-                break
-    
-def model_selection_all(s, output_dir, aug_label_ratio, aug_to):
-    print(s)
-    set_seed(s)
-    
-    kf_1 = KFold(n_splits=10, random_state=42, shuffle=True)
-    kf_2 = KFold(n_splits=9, random_state=42, shuffle=True)
-    nCross = 0
-    for train_idx, test_idx in kf_1.split(ds['train']):
-        nCross = nCross + 1     
-        train_set_1 = ds['train'].select(train_idx)
-
-        for train_idx, val_idx in kf_2.split(train_set_1):
-            val = train_set_1.select(val_idx)
-                
-            train_1 = train_set_1.select(train_idx)
-            train_1 = pd.DataFrame(train_1)
-            train_2 = balance_allMethods_flexible(train_1,r = 0.05,nbest = 2, aug_label_ratio=aug_label_ratio, aug_to = aug_to)           
-            train = pd.concat([train_1,train_2],axis=0,ignore_index=True)
-            #train = train.drop_duplicates()
-            train = Dataset.from_pandas(train)
-        
-            # tokenize and format input data
-            ds_train = train.map(tokenization, batched=True)
-            ds_val = val.map(tokenization, batched=True)
-            ds_train.set_format("torch")
-            ds_val.set_format("torch")
-            
-            model = RobertaForSequenceClassification.from_pretrained(checkpoint, problem_type= "single_label_classification",num_labels=8).to('cuda')
-            args = TrainingArguments(
-                #output_dir=output_dir,
-                output_dir=output_dir,
-                evaluation_strategy="steps",
-                eval_steps=500,
-                learning_rate = best_para['learning_rate'],
-                per_device_train_batch_size=best_para['per_device_train_batch_size'],
-                warmup_steps = best_para['warmup_steps'],
-                per_device_eval_batch_size=64,
-                num_train_epochs=100,
-                seed=42,
-                #gradient_checkpointing=True,
-                fp16=True,
-                load_best_model_at_end=True,
-                metric_for_best_model = 'eval_accuracy',
-                )
-
-
-            trainer = Trainer(
-                    args=args,
-                    compute_metrics=compute_metrics,
-                    train_dataset=ds_train, 
-                    eval_dataset=ds_val,
-                    data_collator=data_collator,
-                    tokenizer=tokenizer,
-                    callbacks=[EarlyStoppingCallback(early_stopping_patience=1)],
-                    model=model
-                )
-
-
-            print(str(nCross) + ' Cross Validation')
-            trainer.train()
-            trainer.save_model(output_dir + str(s)+'/bm_' + str(nCross))
-            break
     
 
 
 def main():
-    # for aug_label_ratio in [0.1,0.5,0.7,0.9,1]:
-    #     for s in [0,1,42]:
-    #         folder_path = 'syn_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    #         output_dir='../../../models/data_aug/manif/' + folder_path
-    #         model_selection_syn(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
-        
-
-    # for s in [42]:
-    #     # aug_label_ratio = 0.1
-    #     # folder_path = 'swap_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    #     # output_dir='../../../models/data_aug/manif/' + folder_path
-    #     # model_selection_swap(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
-        
-    #     # aug_label_ratio = 0.3
-    #     # folder_path = 'syn_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    #     # output_dir='../../../models/data_aug/manif/' + folder_path
-    #     # model_selection_syn(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
-        
-    #     aug_label_ratio = 0.9
-    #     folder_path = 'bt_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
-    #     output_dir='../../../models/data_aug/manif/' + folder_path
-    #     model_selection_bt(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
-    
     for aug_label_ratio in [1]:
         for s in [0,1,42]:
-            folder_path = 'all_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
+            folder_path = 'swap_' + str(aug_label_ratio) + '_' + str(round(1-aug_label_ratio,1)) + '/'
             output_dir='../../../models/data_aug/manif/' + folder_path
-            model_selection_all(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
+            model_selection(s, output_dir, aug_label_ratio, aug_to= 1-aug_label_ratio)
 
 
 
